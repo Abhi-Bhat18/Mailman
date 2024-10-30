@@ -1,13 +1,10 @@
 import { ColumnType, Insertable, Selectable, Updateable } from 'kysely';
 
 export interface ApiKeyTable {
-  id: string;
   api_key: string;
-  project_id: string | null;
+  project_id: string;
   created_by: string;
-  is_active: boolean;
-  expires_at: ColumnType<Date, string | undefined, string>;
-  updated_at: ColumnType<Date, string | undefined, string>;
+  expires_at: ColumnType<Date, string | undefined, string> | null;
   created_at: ColumnType<Date, string | undefined, never>;
 }
 

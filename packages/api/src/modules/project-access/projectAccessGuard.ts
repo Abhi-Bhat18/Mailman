@@ -13,6 +13,7 @@ const MethodPermission = {
   POST: 'create',
   PUT: 'update',
   DELETE: 'delete',
+  MANAGE: 'manage',
 };
 
 @Injectable()
@@ -50,6 +51,8 @@ export class ProjectAccessGuard implements CanActivate {
       if (!hasPermission) {
         throw new NotFoundException();
       }
+
+      request.project_id = project_id;
       return true;
     } catch (error) {
       throw new ForbiddenException();

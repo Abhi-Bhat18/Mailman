@@ -9,7 +9,6 @@ import { ConfigModule } from '@nestjs/config';
 import configuration from './config/configuration';
 import { ProjectModule } from './modules/project/project.module';
 import { EmailModule } from './modules/email/email.module';
-import { ApiModule } from './modules/api/api-key.module';
 import { RoleModule } from './modules/role/role.module';
 import { SeederModule } from './modules/seed/seed.module';
 import { CommandRunnerModule } from 'nest-commander';
@@ -20,7 +19,7 @@ import { CampaignModule } from './modules/campaign/campaign.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { BounceModule } from './modules/bounce/bounce.module';
 import { AnalyticsModule } from './modules/analytics/analytics.module';
-
+import { TransactionalModule } from './modules/transactional/transactional.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -36,11 +35,11 @@ import { AnalyticsModule } from './modules/analytics/analytics.module';
     ContactListModule,
     CampaignModule,
     EmailModule,
-    ApiModule,
     RoleModule,
     CommandRunnerModule,
     EmailTemplateModule,
     BounceModule,
+    TransactionalModule,
     AnalyticsModule,
     ScheduleModule.forRoot(),
   ],

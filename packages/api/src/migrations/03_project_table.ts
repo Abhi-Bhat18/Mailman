@@ -7,6 +7,7 @@ export const up = async (db: Kysely<any>): Promise<void> => {
     .addColumn('name', 'varchar', (col) => col.notNull())
     .addColumn('description', 'varchar', (col) => col.notNull())
     .addColumn('status', 'varchar', (col) => col.notNull().defaultTo('active'))
+    .addColumn('domail', 'varchar', (col) => col.notNull())
     .addColumn('default_mail_from', 'varchar', (col) => col.notNull())
     .addColumn('created_by', 'varchar', (col) => col.notNull())
     .addColumn('updated_at', 'timestamp', (col) =>

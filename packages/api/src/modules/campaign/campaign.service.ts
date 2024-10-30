@@ -123,7 +123,7 @@ export class CampaignService implements OnModuleInit {
         'campaigns.send_later',
         'campaigns.scheduled_at',
         'campaigns.total_bounces',
-        'campaigns.total_deliveried',
+        'campaigns.total_delivered',
         'campaigns.total_clicks',
         'campaigns.total_opens',
         'campaigns.created_at',
@@ -184,7 +184,7 @@ export class CampaignService implements OnModuleInit {
     try {
       let processed = 0;
       let hasMore = true;
-      let deliverd = 0;
+      let delivered = 0;
 
       while (hasMore) {
         const batch = await this.prepareBatch(
@@ -199,7 +199,7 @@ export class CampaignService implements OnModuleInit {
 
         const batchDeliveries = await this.processBatch(batch, campaign);
         processed += batch.length;
-        deliverd += batchDeliveries;
+        delivered += batchDeliveries;
         this.logger.debug(
           `Processed ${processed} contacts for campaign ${campaign.id}`,
         );
@@ -209,11 +209,10 @@ export class CampaignService implements OnModuleInit {
         .updateTable('campaigns')
         .set({
           status: 'completed',
-          total_deliveried: deliverd,
+          total_delivered: delivered,
         })
         .where('id', '=', campaign.id)
         .execute();
-      this.isProcessing = false;
     } catch (error) {
       await this.db
         .updateTable('campaigns')

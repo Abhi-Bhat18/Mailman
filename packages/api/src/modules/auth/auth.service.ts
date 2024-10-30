@@ -128,6 +128,7 @@ export class AuthServices {
 
   refreshAccessToken = async (id: string) => {
     const user = await this.userService.findById(id);
+
     if (user.refresh_token) {
       const newToken = await this.generateJwt({
         id: user.id,

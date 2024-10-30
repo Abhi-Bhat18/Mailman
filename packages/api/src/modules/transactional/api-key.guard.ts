@@ -6,13 +6,13 @@ import {
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
-import { ApiService } from './api-key.services';
+import { TransactionalService } from './transactional.services';
 
 import { Request } from 'express';
 
 @Injectable()
 export class ApiKey implements CanActivate {
-  constructor(private apiKeyService: ApiService) {}
+  constructor(private transactionalService: TransactionalService) {}
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request: Request = context.switchToHttp().getRequest<Request>();
 
@@ -25,6 +25,6 @@ export class ApiKey implements CanActivate {
 
     if (!apiKey || !projectId) throw new UnauthorizedException();
 
-    return await this.apiKeyService.validateAPIKey(apiKey, projectId);
+    return await this.transactionalService.validateAPIKey(apiKey, projectId);
   }
 }

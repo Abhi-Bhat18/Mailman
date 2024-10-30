@@ -103,6 +103,7 @@ export class SeedService implements OnModuleInit {
           description: 'Default project',
           created_by: this.user_id,
           default_mail_from: 'Admin <noreply@mail.domain.com>',
+          domail: 'example-domain.com',
           status: 'active',
         })
         .returningAll()

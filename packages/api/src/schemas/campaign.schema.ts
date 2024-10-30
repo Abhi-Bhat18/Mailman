@@ -19,7 +19,7 @@ export interface CampaignTable {
     | 'canceled'
     | 'failed';
   created_by: string;
-  total_deliveried: number;
+  total_delivered: number;
   total_bounces: number;
   total_opens: number;
   total_clicks: number;

@@ -21,7 +21,7 @@ export const up = async (db: Kysely<any>): Promise<void> => {
         ),
     )
     .addColumn('created_by', 'varchar', (col) => col.notNull())
-    .addColumn('total_deliveried', 'integer', (col) =>
+    .addColumn('total_delivered', 'integer', (col) =>
       col.defaultTo(0).notNull(),
     )
     .addColumn('total_bounces', 'integer', (col) => col.defaultTo(0).notNull())

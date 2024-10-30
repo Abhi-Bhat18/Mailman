@@ -17,9 +17,9 @@ export class AnalyticsService implements OnModuleInit {
   async getDashBoardCounts() {
     const result = await this.db
       .selectFrom('campaigns')
-      .select(({ eb, fn }) => [
+      .select(({ fn }) => [
         fn.count('id').as('total_campaigns'),
-        fn.sum('total_deliveried').as('totalDelivered'), // Sum of total delivered emails
+        fn.sum('total_delivered').as('totalDelivered'), // Sum of total delivered emails
         fn.sum('total_bounces').as('totalBounces'), // Sum of total bounces
         fn.sum('total_opens').as('totalOpens'), // Sum of total email opens
         fn.sum('total_clicks').as('totalClicks'), // Sum of total clicks
@@ -36,19 +36,19 @@ export class AnalyticsService implements OnModuleInit {
         sql`DATE(opened_at)`.as('day'), // Extract the date (day)
         sql`COUNT(*)`.as('view_count'), // Count the number of views
       ])
-      .groupBy('day') // Group by date
-      .orderBy('day','desc') // Optionally order by date
+      .groupBy('day')
+      .orderBy('day', 'desc')
       .execute();
 
     const clicks = await this.db
       .selectFrom('email_clicks')
-      .where((eb) => sql`clicked_at >= NOW() - INTERVAL '30 days'`)
+      .where(() => sql`clicked_at >= NOW() - INTERVAL '30 days'`)
       .select([
-        sql`DATE(clicked_at)`.as('day'), // Extract the date (day)
-        sql`COUNT(*)`.as('click_count'), // Count the number of clicks
+        sql`DATE(clicked_at)`.as('day'),
+        sql`COUNT(*)`.as('click_count'),
       ])
       .groupBy('day') // Group by date
-      .orderBy('day','desc') // Optionally order by date
+      .orderBy('day', 'desc') // Optionally order by date
       .execute();
 
     // Get the last 30 days
@@ -65,9 +65,7 @@ export class AnalyticsService implements OnModuleInit {
       clicks: 0,
     }));
 
-
-    const formatDate = (date: Date) =>
-      date.toISOString().split('T')[0];
+    const formatDate = (date: Date) => date.toISOString().split('T')[0];
 
     // Map views to the respective day
     views.forEach((view) => {
