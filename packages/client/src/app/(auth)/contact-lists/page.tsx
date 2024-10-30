@@ -8,13 +8,13 @@ import {
   DialogContent,
 } from "@/components/ui/dialog";
 import NewListForm from "../../../components/contact-lists/NewListForm";
-
 import { DialogTitle } from "@radix-ui/react-dialog";
 import { DataTable } from "@/components/ui/data-table";
 import { ContactListColumns } from "../../../components/contact-lists/list-column";
 import { useGetAllContactListsQuery } from "@/lib/features/contact-list/contactListApis";
 import { useAppSelector } from "@/lib/hook";
 import isUserAuthorized from "@/utils/permissionCheck";
+import TableLoading from "@/components/loading-screens/TableLoading";
 
 const EmailLists = () => {
   const { defaultProject, permissions } = useAppSelector((state) => state.auth);
@@ -24,6 +24,7 @@ const EmailLists = () => {
     page: 0,
     pageLimit: 10,
   });
+
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -49,7 +50,7 @@ const EmailLists = () => {
         </Dialog>
       </div>
       <div>
-        {isLoading && <div> Loading ...</div>}
+        {isLoading && <div>{<TableLoading columns={5} />}</div>}
         {!isLoading && !isError && (
           <DataTable columns={ContactListColumns} data={data} />
         )}

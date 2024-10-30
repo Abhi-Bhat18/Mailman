@@ -134,7 +134,11 @@ const NewContact : React.FC<Props> = ( { closeDialog} ) => {
           )}
         />
         <div className="flex space-x-5 justify-end items-center">
-          <Button type="submit">Save </Button>
+          <Button disabled={isLoading} type="submit">
+              { 
+                isLoading ? "Saving" : 'Save'
+              }
+             </Button>
         </div>
       </form>
     </Form>

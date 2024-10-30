@@ -7,6 +7,7 @@ import { useGetAllCampaignsQuery } from "@/lib/features/campaign/campaignApis";
 import { useAppSelector } from "@/lib/hook";
 import isUserAuthorized from "@/utils/permissionCheck";
 import { DataTable } from "@/components/ui/data-table";
+import TableLoading from "@/components/loading-screens/TableLoading";
 
 const Campaigns = () => {
   const project_id = useAppSelector(
@@ -26,10 +27,15 @@ const Campaigns = () => {
           </Button>
         )}
       </div>
-      {isLoading && <div>Loading</div>}
+      {isLoading && (
+        <div>
+          <TableLoading columns={6} />
+        </div>
+      )}
       {error && <div>Something went wrong</div>}
-      {!isLoading &&
-        !error && (<DataTable columns={campaignColumns} data={data} />)}
+      {!isLoading && !error && (
+        <DataTable columns={campaignColumns} data={data} />
+      )}
     </section>
   );
 };

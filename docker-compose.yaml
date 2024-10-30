@@ -6,11 +6,11 @@ services:
     ports:
       - '3000:3000'
     environment:
-      NEXT_PUBLIC_API_URL: http://api-server:1335  # Connect to api-server by its service name
+      NEXT_PUBLIC_API_URL: http://api-server:1335
     networks:
       - mailman-network
 
-  api-server:
+  mailman-api:
     image: abhishekbhat18/mailman-api:latest
     container_name: mailman-api
     ports:

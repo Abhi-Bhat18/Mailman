@@ -59,7 +59,7 @@ const SaveTemplate = () => {
         html: renderToStaticMarkup(document, { rootBlockId: "root" }),
         status: status ? status : "ready",
       }).unwrap();
-      router.push(`/template/${result.id}`);
+      router.push(`/templates/${result.id}`);
     } catch (error) {
       console.log("Error", error);
       toast.error("Something went wrong");
@@ -88,18 +88,20 @@ const SaveTemplate = () => {
 
       <div className="space-x-5 w-full flex justify-end items-end">
         <Button
+          disabled={isLoading}
           onClick={form.handleSubmit((values) => handleSubmit(values, "draft"))}
           variant={"secondary"}
           type="button"
         >
-          Save as draft
+          {isLoading ? "Saving as draft" : " Save as draft"}
         </Button>
         <Button
+          disabled={isLoading}
           onClick={form.handleSubmit((values) => handleSubmit(values, "ready"))}
           type="button"
           variant={"default"}
         >
-          Save
+          {isLoading ? "Saving" : "Save"}
         </Button>
       </div>
     </div>

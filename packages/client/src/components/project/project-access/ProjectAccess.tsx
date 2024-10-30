@@ -11,6 +11,7 @@ import InviteUser from "./InviteUser";
 import { useGetProjectUsersQuery } from "@/lib/features/project/projectApis";
 import { DataTable } from "@/components/ui/data-table";
 import { ProjectAccessColumns } from "./projectAccess-columns";
+import TableLoading from "@/components/loading-screens/TableLoading";
 
 interface Props {
   project_id: string;
@@ -44,7 +45,11 @@ const ProjectUsers: React.FC<Props> = ({ project_id }) => {
           </Dialog>
         </div>
         <div className="">
-          {isLoading && <>Loading ...</>}
+          {isLoading && <>
+          { 
+            <TableLoading columns={4}/>
+          }
+          </>}
           {!isLoading && !isError && (
             <DataTable
               columns={ProjectAccessColumns}

@@ -19,6 +19,7 @@ import {
   DialogClose,
   DialogHeader,
 } from "@/components/ui/dialog";
+import CardLoading from "@/components/loading-screens/CardLoading";
 
 const ContactListDetails = () => {
   const path = usePathname();
@@ -37,7 +38,9 @@ const ContactListDetails = () => {
   const { contactList } = useAppSelector((state) => state.contactList);
 
   if (isLoading) {
-    <div className="w-full">Loading ...</div>;
+    <div className="w-full">
+      <CardLoading rows={7}/>
+    </div>;
   } else if (!isLoading && !isError) {
     return (
       <div className="basis-1/2 p-5 bg-card rounded-md relative">

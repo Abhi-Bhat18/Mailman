@@ -45,8 +45,8 @@ const UpdateProjectForm: React.FC<Props> = ({ project_id, closeDialog }) => {
   const form = useForm<z.infer<typeof projectSchema>>({
     resolver: zodResolver(projectSchema),
     defaultValues: {
-      description: project?.name,
-      name: project?.description,
+      name: project?.name,
+      description: project?.description,
       default_mail_from: project?.default_mail_from,
     },
   });

@@ -1,5 +1,5 @@
 "use client";
-import React, {useState}  from "react";
+import React, { useState } from "react";
 import { usePathname } from "next/navigation";
 import { useGetACampaignQuery } from "@/lib/features/campaign/campaignApis";
 import { Pencil } from "lucide-react";
@@ -9,27 +9,17 @@ import { useAppSelector } from "@/lib/hook";
 import {
   Dialog,
   DialogTrigger,
-  DialogDescription,
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogFooter,
 } from "@/components/ui/dialog";
+import CardLoading from "../loading-screens/CardLoading";
 
 import UpdateCampaignForm from "./UpdateCampaignForm";
 interface RowProps {
   fieldName: string;
   value: string;
 }
-
-const DetailRow: React.FC<RowProps> = ({ fieldName, value }) => {
-  return (
-    <div className="flex w-full space-x-5">
-      <p className="basis-1/4">{fieldName}</p>
-      <p className="basis-3/4">: {value}</p>
-    </div>
-  );
-};
 
 const Details = () => {
   const pathName = usePathname();
@@ -43,7 +33,11 @@ const Details = () => {
   });
 
   if (isLoading) {
-    return <div> Loading...</div>;
+    return (
+      <div>
+        <CardLoading rows={6} />
+      </div>
+    );
   } else if (!isLoading && !isError && campaign) {
     return (
       <div className="bg-muted/40 p-5 rounded-md space-y-2 relative">
@@ -55,7 +49,7 @@ const Details = () => {
             <DialogContent className="border-secondary text-white">
               <DialogHeader>
                 <DialogTitle>Edit Campaign</DialogTitle>
-                  <UpdateCampaignForm closeDialog={() => setIsOpen(false)}/>
+                <UpdateCampaignForm closeDialog={() => setIsOpen(false)} />
               </DialogHeader>
             </DialogContent>
           </Dialog>

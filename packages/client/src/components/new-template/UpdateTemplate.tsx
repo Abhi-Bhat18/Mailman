@@ -30,7 +30,6 @@ const templateSchema = z.object({
 
 const UpdateTemplate = () => {
   const router = useRouter();
-  const pathName = usePathname();
 
   const [updateTemplate, { isLoading, isError }] = useUpdateTemplateMutation();
 
@@ -53,7 +52,7 @@ const UpdateTemplate = () => {
 
   const handleSubmit = async (
     values: z.infer<typeof templateSchema>,
-    status: 'draft' | 'ready'
+    status: "draft" | "ready"
   ) => {
     try {
       const result = await updateTemplate({
@@ -94,12 +93,12 @@ const UpdateTemplate = () => {
 
       <div className="space-x-5 w-full flex justify-end items-end">
         <Button
-          onClick={form.handleSubmit(values => handleSubmit(values, 'draft'))}
+          onClick={form.handleSubmit((values) => handleSubmit(values, "draft"))}
           disabled={isLoading}
           variant={"secondary"}
           type="button"
         >
-          { isLoading ? 'Updating' : "Update as draft" }
+          {isLoading ? "Updating" : "Update as draft"}
         </Button>
         <Button
           disabled={isLoading}
@@ -107,7 +106,7 @@ const UpdateTemplate = () => {
           type="button"
           variant={"default"}
         >
-          { isLoading ? "Saving" : 'Save' }
+          {isLoading ? "Saving" : "Save"}
         </Button>
       </div>
     </div>

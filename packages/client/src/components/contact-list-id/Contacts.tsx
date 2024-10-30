@@ -19,6 +19,8 @@ import {
 import NewContact from "./NewContact";
 import { toast } from "sonner";
 
+import TableLoading from "../loading-screens/TableLoading";
+
 const Contacts = () => {
   const pathName = usePathname();
   const contact_list_id = pathName.split("/").at(-1);
@@ -26,7 +28,7 @@ const Contacts = () => {
   const project_id = useAppSelector(
     (state) => state.auth.defaultProject?.project_id
   );
-  const { contacts} = useAppSelector(state => state.contactList);
+  const { contacts } = useAppSelector((state) => state.contactList);
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -96,7 +98,7 @@ const Contacts = () => {
         </div>
       </div>
       <div className="w-full">
-        {isLoading && <div>Loading...</div>}
+        {isLoading && <div>{<TableLoading columns={6} />}</div>}
         {!isLoading && !error && (
           <DataTable
             data={contacts}

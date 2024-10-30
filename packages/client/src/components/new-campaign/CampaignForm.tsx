@@ -79,8 +79,6 @@ const CampaignForm: React.FC<Props> = () => {
     (state) => state.auth.defaultProject?.project_id
   );
 
-  console.log("Mail from");
-
   const [sendLater, setSendLater] = useState(false);
 
   const handleSubmit = async (

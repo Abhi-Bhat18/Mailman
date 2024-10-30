@@ -53,7 +53,6 @@ const NewListForm : React.FC<Props> = ( { closeDialog} ) => {
       email_opt_in: "single",
     },
   });
-  // const { project_id } = useAppSelector((state) => state.auth.defaultProject);
   const project_id = useAppSelector( state => state.auth.defaultProject?.project_id )
   const router = useRouter();
 
@@ -67,7 +66,7 @@ const NewListForm : React.FC<Props> = ( { closeDialog} ) => {
       }).unwrap();
       closeDialog();
       toast.success("List created successfully");
-      router.push(`/contact-list/contact?id=${result.id}`);
+      router.push(`/contact-lists/contact?id=${result.id}`);
     } catch (error) {
       toast.error("Something went wrong");
     }
