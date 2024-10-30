@@ -1,7 +1,5 @@
 # Mailman
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-
 **Mailman** is a self-hostable, open-source email marketing tool designed to empower cross-functional teams—designers, developers, and marketers—by centralizing essential email campaign tools and workflows. Built for collaboration and efficiency, it enables teams to stay aligned and manage campaigns under one cohesive system.
 
 ## Features
